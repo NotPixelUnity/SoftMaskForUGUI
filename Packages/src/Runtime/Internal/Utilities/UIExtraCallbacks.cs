@@ -21,7 +21,7 @@ namespace Coffee.UISoftMaskInternal
         static UIExtraCallbacks()
         {
             Canvas.willRenderCanvases += OnBeforeCanvasRebuild;
-            Logging.LogMulticast(typeof(Canvas), "willRenderCanvases", message: "ctor");
+            //Logging.LogMulticast(typeof(Canvas), "willRenderCanvases", message: "ctor");
         }
 
         /// <summary>
@@ -70,16 +70,9 @@ namespace Coffee.UISoftMaskInternal
 
             // Explicitly set `Canvas.willRenderCanvases += CanvasUpdateRegistry.PerformUpdate`.
             CanvasUpdateRegistry.IsRebuildingLayout();
-#if TMP_ENABLE
-            // Explicitly set `Canvas.willRenderCanvases += TMP_UpdateManager.DoRebuilds`.
-            typeof(TMPro.TMP_UpdateManager)
-                .GetProperty("instance", BindingFlags.NonPublic | BindingFlags.Static)
-                .GetValue(null);
-#endif
             Canvas.willRenderCanvases -= OnAfterCanvasRebuild;
             Canvas.willRenderCanvases += OnAfterCanvasRebuild;
-            Logging.LogMulticast(typeof(Canvas), "willRenderCanvases",
-                message: "InitializeAfterCanvasRebuild");
+            //Logging.LogMulticast(typeof(Canvas), "willRenderCanvases", message: "InitializeAfterCanvasRebuild");
         }
 
 #if UNITY_EDITOR
